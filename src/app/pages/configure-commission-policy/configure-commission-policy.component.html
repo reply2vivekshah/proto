@@ -1,0 +1,162 @@
+<div class="row">
+    <div class="col-12">
+        <div class="" style="margin:10px;">
+            <div class="card-body">
+                <h5 class="card-title">Define Commission Policy</h5>
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="inputEmail4">Policy Name</label>
+                                <input type="text" class="form-control" id="inputEmail4"
+                                    placeholder="please enter title">
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="inputPassword4">Description</label>
+                                <textarea rows="3" class="form-control"
+                                    placeholder="please enter description"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-row row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">Frequency</label>
+                                <select class="form-control">
+                                    <option>Real-time</option>
+                                    <option>Daily</option>
+                                    <option>Weekly</option>
+                                    <option>Fortnightly</option>
+                                    <option>Monthly</option>
+                                    <option>Quarterly</option>
+                                    <option>Half-yearly</option>
+                                    <option>Yearly</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">From </label>
+                                <input type="text" class="form-control" id="frmDate"
+                                    placeholder="please select from date">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">To</label>
+                                <input type="text" class="form-control" id="toDate" placeholder="please select to date">
+                            </div>
+                        </div>
+                        <div class="form-row row">
+
+
+
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">Value Type</label>
+                                <select class="form-control">
+                                    <option>Percentage</option>
+                                    <option>Absolute Value</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">Commission Value</label>
+                                <input type="text" class="form-control" id="toDate"
+                                    placeholder="please enter commission value">
+                            </div>
+
+                        </div>
+                        <div class="form-row row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">Behaviour</label>
+                                <select class="form-control">
+                                    <option>Flat</option>
+                                    <option>Slab-base</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">Event</label>
+                                <select class="form-control">
+                                    <option>Activation</option>
+                                    <option>Renewal</option>
+                                    <option>Payment</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">Policy Fields</label>
+                                <div class="input-group mb-3">
+                                    <select class="form-control" [(ngModel)]="fieldSelected">
+                                        <optgroup *ngFor="let field of policyFields" label=" {{field.label}}">
+                                            <option *ngFor="let fieldsDetail of field.fieldsDetails"
+                                                [value]="fieldsDetail.id">
+                                                {{fieldsDetail.label}}
+                                            </option>
+                                        </optgroup>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary  pull-right" (click)="selectPolicyField()">
+                                            Add </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="selectedPolicyFields.length>0">
+                            <div class="col-12">
+                                <div class="row" style="margin-bottom:10px;">
+                                    <div class="col-10">
+                                        <h6>Policy Details</h6>
+                                    </div>
+                                    <div class="col-2">
+                                        <button (click)="addPolicyField()" class="btn btn-primary btn-sm pull-right">
+                                            Add </button>
+                                    </div>
+                                </div>
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th *ngFor="let selectedPolicyField of selectedPolicyFields">
+                                                {{selectedPolicyField.label}}
+                                            </th>
+                                            <th>Commission (in %)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let fieldValue of fieldValues">
+                                            <td>1</td>
+                                            <td *ngFor="let selectedPolicyField of selectedPolicyFields">
+                                                <div *ngIf="selectedPolicyField.type=='dropdown'">
+                                                    <select style="width:100%;border: none;">
+                                                        <option *ngFor="let item of selectedPolicyField.items">
+                                                            {{item.label}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div *ngIf="selectedPolicyField.type=='text'">
+                                                    <input type="text" style="width:100%;border: none;" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" style="width:100%;border: none;"
+                                                    placeholder="Please enter commission" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Save</button>&nbsp;
+                                <button type="submit" class="btn btn-secondary">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
