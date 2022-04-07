@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +10,7 @@ import { ConfigureProductGroupComponent } from './pages/configure-product-group/
 import { ConfigureCommissionPolicyComponent } from './pages/configure-commission-policy/configure-commission-policy.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ConfigureRuleComponent } from './pages/configure-rule/configure-rule.component';
 
 const routes: Routes = [
   { path: 'pprofile', component: ConfigurePartnerProfileComponent },
@@ -26,6 +26,7 @@ const routes: Routes = [
     ConfigureCommissionPlanComponent,
     ConfigureProductGroupComponent,
     ConfigureCommissionPolicyComponent,
+    ConfigureRuleComponent,
   ],
   imports: [
     BrowserModule,

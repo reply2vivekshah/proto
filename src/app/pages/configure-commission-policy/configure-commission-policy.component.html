@@ -81,35 +81,17 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-row row">
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">Policy Fields</label>
-                                <div class="input-group mb-3">
-                                    <select class="form-control" [(ngModel)]="fieldSelected">
-                                        <optgroup *ngFor="let field of policyFields" label=" {{field.label}}">
-                                            <option *ngFor="let fieldsDetail of field.fieldsDetails"
-                                                [value]="fieldsDetail.id">
-                                                {{fieldsDetail.label}}
-                                            </option>
-                                        </optgroup>
-                                    </select>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary  pull-right" (click)="selectPolicyField()">
-                                            Add </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="row" *ngIf="selectedPolicyFields.length>0">
+
+                        <div class="row">
                             <div class="col-12">
                                 <div class="row" style="margin-bottom:10px;">
                                     <div class="col-10">
-                                        <h6>Policy Details</h6>
+                                        <h6>Commission Rules</h6>
                                     </div>
                                     <div class="col-2">
-                                        <button (click)="addPolicyField()" class="btn btn-primary btn-sm pull-right">
-                                            Add </button>
+                                        <button (click)="openRuleConfig()" class="btn btn-primary btn-sm pull-right">
+                                            Add Rule </button>
                                     </div>
                                 </div>
 
@@ -117,26 +99,41 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th *ngFor="let selectedPolicyField of selectedPolicyFields">
-                                                {{selectedPolicyField.label}}
-                                            </th>
+                                            <th> Rule </th>
                                             <th>Commission (in %)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let fieldValue of fieldValues">
+                                        <tr>
                                             <td>1</td>
-                                            <td *ngFor="let selectedPolicyField of selectedPolicyFields">
-                                                <div *ngIf="selectedPolicyField.type=='dropdown'">
-                                                    <select style="width:100%;border: none;">
-                                                        <option *ngFor="let item of selectedPolicyField.items">
-                                                            {{item.label}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div *ngIf="selectedPolicyField.type=='text'">
-                                                    <input type="text" style="width:100%;border: none;" />
-                                                </div>
+                                            <td>
+                                                <span style="margin-right:10px;" *ngFor="let rule of rules"
+                                                    class="badge bg-success">
+                                                    {{rule.field.label}}=
+                                                    <span *ngFor="let fieldValue of rule.fieldValues; last as isLast">
+                                                        {{fieldValue.value}}
+                                                        <span *ngIf="!isLast">,&nbsp;</span>
+                                                    </span>
+                                                    <span style="cursor: pointer;" aria-hidden="true">&times;</span>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <input type="text" style="width:100%;border: none;"
+                                                    placeholder="Please enter commission" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>
+                                                <span style="margin-right:10px;" *ngFor="let rule of rules1"
+                                                    class="badge bg-success">
+                                                    {{rule.field.label}}=<span
+                                                        *ngFor="let fieldValue of rule.fieldValues; last as isLast">
+                                                        {{fieldValue.value}}
+                                                        <span *ngIf="!isLast">,&nbsp;</span>
+                                                    </span>
+                                                    <span style="cursor: pointer;" aria-hidden="true">&times;</span>
+                                                </span>
                                             </td>
                                             <td>
                                                 <input type="text" style="width:100%;border: none;"

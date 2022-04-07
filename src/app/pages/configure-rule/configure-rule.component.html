@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <h6 class="modal-title">Configure Commission Rule</h6>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="dismiss()" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-row row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Field</label>
+                    <div class="input-group mb-3">
+                        <select class="form-control" (change)="changeField()" [(ngModel)]="selectedFieldId">
+                            <option *ngFor="let field of policyFields" [value]="field.id">
+                                {{field.label}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-6" *ngIf="selectedField">
+                    <label for="inputCity">Field Category</label>
+                    <div class="input-group mb-3">
+                        <select class="form-control" (change)="changeFieldDetails()"
+                            [(ngModel)]="selectedFieldDetailId">
+                            <option *ngFor="let fieldsDetail of selectedField.fieldsDetails" [value]="fieldsDetail.id">
+                                {{fieldsDetail.label}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12" *ngIf="selectedFieldDetail">
+            <div class="form-row row">
+                <div class="form-group col-md-12">
+                    <label for="inputCity">{{selectedFieldDetail.label}}</label>
+                    <div class="input-group mb-3">
+                        <input id="typeahead-basic" [resultTemplate]="rt" [inputFormatter]="formatter" type="text"
+                            class="form-control" [(ngModel)]="fieldValue" [ngbTypeahead]="search" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary btn-sm" (click)="save()">Save</button>&nbsp;
+</div>
+
+<ng-template #rt let-r="result" let-t="term">
+    <ngb-highlight [result]="r.label" [term]="t"></ngb-highlight>
+</ng-template>

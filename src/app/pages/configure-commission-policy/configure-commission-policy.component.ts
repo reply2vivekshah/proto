@@ -1,4 +1,6 @@
+import { ConfigureRuleComponent } from './../configure-rule/configure-rule.component';
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-configure-commission-policy',
@@ -6,80 +8,80 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./configure-commission-policy.component.scss'],
 })
 export class ConfigureCommissionPolicyComponent implements OnInit {
-  constructor() {}
+  constructor(private _modal: NgbModal) {}
 
   ngOnInit(): void {}
-  fieldSelected = {};
-  selectedPolicyFields = new Array();
-  fieldValues = new Array();
-  policyFields = [
+
+  rules = [
     {
-      id: 1,
-      label: 'Plan',
-      fieldsDetails: [
+      field: {
+        type: 1,
+        label: 'Plan name',
+      },
+      fieldValues: [
         {
           id: 1,
-          label: 'Plan Name',
-          type: 'dropdown',
-          items: [
-            { id: 1, label: '50 MBPS Plan' },
-            { id: 2, label: '100 MBPS Plan' },
-            { id: 3, label: '150 MBPS Plan' },
-          ],
+          value: '100 MBPS Plan',
         },
         {
           id: 2,
-          label: 'Product Group',
-          type: 'dropdown',
-          items: [
-            { id: 1, label: 'Group A' },
-            { id: 2, label: 'Group B' },
-            { id: 3, label: 'Group C' },
-          ],
+          value: '200 MBPS Plan',
         },
       ],
     },
     {
-      id: 2,
-      label: 'Customer',
-      fieldsDetails: [
+      field: {
+        type: 2,
+        label: 'Customer Category',
+      },
+      fieldValues: [
         {
-          id: 3,
-          label: 'Customer Category',
-          type: 'dropdown',
-          items: [
-            { id: 1, label: 'Student' },
-            { id: 2, label: 'Government' },
-          ],
-        },
-        {
-          id: 4,
-          label: 'Area',
-          type: 'text',
+          id: 1,
+          value: 'Student',
         },
       ],
     },
   ];
 
-  selectPolicyField() {
-    if (this.fieldValues.length === 0) {
-      this.fieldValues.push({});
-    }
-    for (var index in this.policyFields) {
-      for (var detailIndex in this.policyFields[index].fieldsDetails) {
-        if (
-          this.policyFields[index].fieldsDetails[detailIndex].id ==
-          this.fieldSelected
-        ) {
-          this.selectedPolicyFields.push(
-            this.policyFields[index].fieldsDetails[detailIndex]
-          );
-        }
-      }
-    }
-  }
+  rules1 = [
+    {
+      field: {
+        type: 1,
+        label: 'Plan name',
+      },
+      fieldValues: [
+        {
+          id: 1,
+          value: '50 MBPS Plan',
+        },
+      ],
+    },
+    {
+      field: {
+        type: 2,
+        label: 'Customer Category',
+      },
+      fieldValues: [
+        {
+          id: 1,
+          value: 'Government',
+        },
+      ],
+    },
+  ];
 
-  addPolicyField() {
-    this.fieldValues.push({});
+
+
+  openRuleConfig() {
+    const modalRrf = this._modal.open(ConfigureRuleComponent, {
+      size: 'md',
+      backdrop: 'static',
+      keyboard: false,
+      centered: false,
+    });
+    modalRrf.result.then(
+      (bData) => {},
+      (bDismissed) => {}
+    );
   }
 }
